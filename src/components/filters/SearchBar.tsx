@@ -1,5 +1,7 @@
 import {
   Box,
+  Button,
+  Collapse,
   Divider,
   IconButton,
   InputAdornment,
@@ -11,7 +13,8 @@ import { useEffect, useState } from "react";
 import { useGameContext } from "../../contexts/GameContext/GameContext";
 
 const SearchBar = () => {
-  const { filters, setSearchQuery } = useGameContext();
+  const { filters, setSearchQuery, expandFilters, toggleExpandFilters } =
+    useGameContext();
   const [inputValue, setInputValue] = useState(filters.searchQuery);
   const debouncedValue = useDebounce(inputValue, 300);
 
@@ -29,34 +32,51 @@ const SearchBar = () => {
   };
 
   return (
-    <Box sx={{ mb: 1 }}>
-      <TextField
-        fullWidth
-        size="small"
-        placeholder="Search games by name or provider..."
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        slotProps={{
-          input: {
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: "text.secondary" }} />
-              </InputAdornment>
-            ),
-            endAdornment: inputValue ? (
-              <InputAdornment position="end">
-                <IconButton size="small" onClick={handleClearSearch}>
-                  <ClearIcon fontSize="small" />
-                </IconButton>
-              </InputAdornment>
-            ) : null,
-          },
-        }}
-        sx={{ mb: 2 }}
-      />
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+        }}>
+        <TextField
+          fullWidth
+          size="small"
+          placeholder="Search games by name or provider..."
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: "text.secondary" }} />
+                </InputAdornment>
+              ),
+              endAdornment: inputValue ? (
+                <InputAdornment position="end">
+                  <IconButton size="small" onClick={handleClearSearch}>
+                    <ClearIcon fontSize="small" />
+                  </IconButton>
+                </InputAdornment>
+              ) : null,
+            },
+          }}
+        />
 
-      <Divider orientation="horizontal" flexItem />
-    </Box>
+        <Button
+          size="small"
+          onClick={toggleExpandFilters}
+          sx={{ minWidth: 110 }}>
+          {expandFilters ? "Hide Filters" : "Show Filters"}
+        </Button>
+      </Box>
+
+      <Collapse in={expandFilters}>
+        <Box sx={{ mt: 2 }}>
+          <Divider orientation="horizontal" flexItem />
+        </Box>
+      </Collapse>
+    </>
   );
 };
 

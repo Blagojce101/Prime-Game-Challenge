@@ -49,6 +49,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [expandFilters, setExpandFilters] = useState<boolean>(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -123,6 +124,10 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     return applyAllFilters(games, filters, favorites);
   }, [games, filters, favorites]);
 
+  const toggleExpandFilters = useCallback(() => {
+    setExpandFilters((prev) => !prev);
+  }, []);
+
   const contextValue: GameContextType = useMemo(
     () => ({
       games,
@@ -139,6 +144,8 @@ export const GameProvider = ({ children }: GameProviderProps) => {
       setProvider,
       setShowFavoritesOnly,
       clearFilters,
+      expandFilters,
+      toggleExpandFilters,
     }),
     [
       games,
@@ -155,6 +162,8 @@ export const GameProvider = ({ children }: GameProviderProps) => {
       setProvider,
       setShowFavoritesOnly,
       clearFilters,
+      expandFilters,
+      toggleExpandFilters,
     ],
   );
 

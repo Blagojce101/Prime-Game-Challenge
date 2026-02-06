@@ -38,4 +38,6 @@ export interface GameContextActions {
 export interface GameContextType extends GameContextState, GameContextActions {
   filteredGames: Game[];
   setProvider: (provider: string | "all") => void;
+  expandFilters: boolean;
+  toggleExpandFilters: () => void;
 }
