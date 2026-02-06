@@ -181,7 +181,12 @@ const FilterBar = () => {
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Chip
             sx={{ paddingX: 1 }}
-            icon={<FavoriteIcon fontSize="small" />}
+            icon={
+              <FavoriteIcon
+                fontSize="small"
+                color={favorites.length !== 0 ? "error" : "inherit"}
+              />
+            }
             label={`Favorites Only (${favorites.length})`}
             clickable
             disabled={favorites.length === 0}
