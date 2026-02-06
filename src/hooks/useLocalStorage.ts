@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { getFromLocalStorage, setToLocalStorage } from "../utils/localStorage";
 
-export const useLocalStorage = <T,>(
+export function useLocalStorage<T>(
   key: string,
   initialValue: T,
-): [T, (value: T | ((prevValue: T) => T)) => void] => {
+): [T, (value: T | ((prevValue: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(initialValue);
 
   useEffect(() => {
@@ -26,4 +26,4 @@ export const useLocalStorage = <T,>(
   );
 
   return [storedValue, setValue];
-};
+}
