@@ -40,6 +40,7 @@ const CategoryFilters = () => {
         flexDirection: isMobile ? "column" : "row",
         justifyContent: "space-between",
         gap: 2,
+        mb: 1,
       }}>
       <Box
         sx={{

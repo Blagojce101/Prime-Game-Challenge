@@ -20,6 +20,14 @@ export const filterByCategory = (
   return games.filter((game) => game.category === category);
 };
 
+export const filterByProvider = (
+  games: Game[],
+  provider: string | "all",
+): Game[] => {
+  if (provider === "all") return games;
+  return games.filter((game) => game.provider === provider);
+};
+
 export const filterByFavorites = (
   games: Game[],
   favorites: string[],
@@ -39,6 +47,7 @@ export const applyAllFilters = (
 
   filtered = filterBySearch(filtered, filters.searchQuery);
   filtered = filterByCategory(filtered, filters.category);
+  filtered = filterByProvider(filtered, filters.provider);
   filtered = filterByFavorites(filtered, favorites, filters.showFavoritesOnly);
 
   return filtered;

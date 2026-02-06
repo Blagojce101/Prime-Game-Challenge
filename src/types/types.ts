@@ -14,6 +14,7 @@ export interface FilterState {
   searchQuery: string;
   category: GameCategory | "all";
   showFavoritesOnly: boolean;
+  provider: string | "all";
 }
 
 export interface GameContextState {
@@ -36,4 +37,5 @@ export interface GameContextActions {
 
 export interface GameContextType extends GameContextState, GameContextActions {
   filteredGames: Game[];
+  setProvider: (provider: string | "all") => void;
 }

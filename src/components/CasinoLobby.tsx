@@ -21,7 +21,7 @@ const CasinoLobby = () => {
           px: { xs: 2, sm: 3 },
         }}>
         {/* <-------- FILTERS --------> */}
-        <Box sx={{ mb: { xs: 3, md: 4 } }}>
+        <Box sx={{ mb: 2 }}>
           <Filters />
         </Box>
 

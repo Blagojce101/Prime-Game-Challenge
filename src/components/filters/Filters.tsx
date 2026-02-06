@@ -3,6 +3,7 @@ import { Clear as ClearIcon } from "@mui/icons-material";
 import { useGameContext } from "../../contexts/GameContext/GameContext";
 import SearchBar from "./SearchBar";
 import CategoryFilters from "./CategoryFilters";
+import ProviderFilters from "./ProviderFilters";
 
 const Filters = () => {
   const { filters, clearFilters } = useGameContext();
@@ -10,7 +11,8 @@ const Filters = () => {
   const hasActiveFilters =
     filters.searchQuery !== "" ||
     filters.category !== "all" ||
-    filters.showFavoritesOnly;
+    filters.showFavoritesOnly ||
+    filters.provider !== "all";
 
   return (
     <Paper
@@ -31,7 +33,7 @@ const Filters = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          mb: 2,
+          mb: 1,
         }}>
         <Typography
           variant="subtitle1"
@@ -52,6 +54,23 @@ const Filters = () => {
 
       {/* <-------- CATEGORIES CHIPS --------> */}
       <CategoryFilters />
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 1,
+        }}>
+        <Typography
+          variant="subtitle1"
+          sx={{ color: "text.secondary", fontWeight: 600 }}>
+          Providers
+        </Typography>
+      </Box>
+
+      {/* <-------- PROVIDERS CHIPS --------> */}
+      <ProviderFilters />
     </Paper>
   );
 };

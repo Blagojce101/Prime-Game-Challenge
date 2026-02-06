@@ -24,6 +24,7 @@ import data from "../../data/db.json";
 const initialFilters: FilterState = {
   searchQuery: "",
   category: "all",
+  provider: "all",
   showFavoritesOnly: false,
 };
 
@@ -62,16 +63,13 @@ export const GameProvider = ({ children }: GameProviderProps) => {
         );
 
         const cachedGames = getFromLocalStorage<Game[]>(STORAGE_KEYS.GAMES, []);
-
-        if (cachedGames.length > 0) {
-          setGames(cachedGames);
-        }
+        if (cachedGames.length > 0) setGames(cachedGames);
 
         const fetchedGames = await fetchGamesFromLocalJson();
 
         setGames(fetchedGames);
         setToLocalStorage(STORAGE_KEYS.GAMES, fetchedGames);
-      } catch (err) {
+      } catch {
         setError("Failed to load games");
       } finally {
         setIsLoading(false);
@@ -109,6 +107,10 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     setFilters((prev) => ({ ...prev, category }));
   }, []);
 
+  const setProvider = useCallback((provider: string | "all") => {
+    setFilters((prev) => ({ ...prev, provider }));
+  }, []);
+
   const setShowFavoritesOnly = useCallback((show: boolean) => {
     setFilters((prev) => ({ ...prev, showFavoritesOnly: show }));
   }, []);
@@ -134,6 +136,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
       addToRecentlyViewed,
       setSearchQuery,
       setCategory,
+      setProvider,
       setShowFavoritesOnly,
       clearFilters,
     }),
@@ -149,6 +152,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
       addToRecentlyViewed,
       setSearchQuery,
       setCategory,
+      setProvider,
       setShowFavoritesOnly,
       clearFilters,
     ],
@@ -161,10 +165,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
 
 export const useGameContext = (): GameContextType => {
   const context = useContext(GameContext);
-
-  if (!context) {
+  if (!context)
     throw new Error("useGameContext must be used within GameProvider");
-  }
-
   return context;
 };

@@ -58,7 +58,7 @@ const RecentlyViewed = () => {
 
   return (
     <Fade in timeout={300}>
-      <Box sx={{ mb: 4 }}>
+      <Box sx={{ mb: 2 }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
           <HistoryIcon sx={{ color: "text.secondary" }} />
           <Typography
