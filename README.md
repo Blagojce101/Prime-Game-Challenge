@@ -36,6 +36,8 @@ Open http://localhost:5173 in your browser.
 
 ## Live Demo
 
+Open https://prime-game-challenge.vercel.app/ in your browser.
+
 
 ---
 
