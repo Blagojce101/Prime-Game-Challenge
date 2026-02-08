@@ -6,6 +6,7 @@ import {
   Chip,
   Button,
   Divider,
+  Tooltip,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -132,13 +133,16 @@ const GameDetailsModal = () => {
             </Typography>
           </Box>
 
-          <IconButton onClick={handleFavorite}>
-            {isFavorite ? (
-              <FavoriteIcon sx={{ color: "error.main" }} />
-            ) : (
-              <FavoriteBorderIcon />
-            )}
-          </IconButton>
+          <Tooltip
+            title={isFavorite ? "Remove from favorites" : "Add to favorites"}>
+            <IconButton onClick={handleFavorite}>
+              {isFavorite ? (
+                <FavoriteIcon sx={{ color: "error.main" }} />
+              ) : (
+                <FavoriteBorderIcon />
+              )}
+            </IconButton>
+          </Tooltip>
         </Box>
 
         <Divider sx={{ my: 2 }} />

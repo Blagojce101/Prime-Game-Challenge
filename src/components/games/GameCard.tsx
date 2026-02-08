@@ -36,7 +36,8 @@ const GameCard = ({ game }: GameCardProps) => {
   const isFavorite = favorites.includes(game.id);
   const { openModal } = useModal();
 
-  const handlePlay = () => {
+  const handlePlay = (event: React.MouseEvent) => {
+    event.stopPropagation();
     addToRecentlyViewed(game.id);
     enqueueSnackbar(`Starting ${game.name} !`, { variant: "info" });
   };
@@ -176,7 +177,9 @@ const GameCard = ({ game }: GameCardProps) => {
           variant="contained"
           fullWidth
           startIcon={<PlayIcon />}
-          onClick={handlePlay}
+          onClick={(event) => {
+            handlePlay(event);
+          }}
           sx={{
             fontWeight: 600,
             py: 1,
