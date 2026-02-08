@@ -65,3 +65,18 @@ export const getCategoryDisplayName = (
 
   return categoryNames[category] || category;
 };
+
+export const getCategoryColor = (
+  game: Game,
+): "primary" | "secondary" | "error" => {
+  switch (game.category) {
+    case "slots":
+      return "primary";
+    case "table":
+      return "secondary";
+    case "live":
+      return "error";
+    default:
+      return "primary";
+  }
+};

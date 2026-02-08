@@ -18,8 +18,12 @@ import {
 } from "@mui/icons-material";
 import type { Game } from "../../types/types";
 import { useGameContext } from "../../contexts/GameContext/GameContext";
-import { getCategoryDisplayName } from "../../utils/gameFilters";
+import {
+  getCategoryColor,
+  getCategoryDisplayName,
+} from "../../utils/gameFilters";
 import { useSnackbar } from "notistack";
+import { useModal } from "../../contexts/ModalContext/ModalContext";
 
 interface GameCardProps {
   game: Game;
@@ -30,6 +34,7 @@ const GameCard = ({ game }: GameCardProps) => {
   const { enqueueSnackbar } = useSnackbar();
   const [imageLoaded, setImageLoaded] = useState(false);
   const isFavorite = favorites.includes(game.id);
+  const { openModal } = useModal();
 
   const handlePlay = () => {
     addToRecentlyViewed(game.id);
@@ -50,21 +55,9 @@ const GameCard = ({ game }: GameCardProps) => {
     );
   };
 
-  const getCategoryColor = (): "primary" | "secondary" | "error" => {
-    switch (game.category) {
-      case "slots":
-        return "primary";
-      case "table":
-        return "secondary";
-      case "live":
-        return "error";
-      default:
-        return "primary";
-    }
-  };
-
   return (
     <Card
+      onClick={() => openModal({ game, size: "md" })}
       sx={{
         height: "100%",
         display: "flex",
@@ -105,7 +98,7 @@ const GameCard = ({ game }: GameCardProps) => {
 
       <Chip
         label={getCategoryDisplayName(game.category)}
-        color={getCategoryColor()}
+        color={getCategoryColor(game)}
         size="small"
         sx={{
           position: "absolute",

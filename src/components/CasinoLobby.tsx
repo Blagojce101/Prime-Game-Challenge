@@ -26,7 +26,9 @@ const CasinoLobby = () => {
         </Box>
 
         {/* <-------- RECENTLY VIEWED --------> */}
-        <RecentlyViewed />
+        <Box sx={{ mb: 1.5 }}>
+          <RecentlyViewed />
+        </Box>
 
         {/* <-------- GAMES GRID --------> */}
         <GamesGrid />

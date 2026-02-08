@@ -2,6 +2,14 @@ export type GameCategory = "slots" | "table" | "live";
 
 export type ThemeMode = "light" | "dark";
 
+export type ModalSize = "sm" | "md" | "lg" | "fullscreen";
+
+export interface GameDetailsModal {
+  open: boolean;
+  game: Game | null;
+  size: ModalSize;
+}
+
 export interface Game {
   id: string;
   name: string;
